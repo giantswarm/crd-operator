@@ -20,16 +20,37 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+
+type CustomResourceDefinitionSourceType string
+
+const (
+	// File is a CRD source type where CRDs are stored in a YAML file that can has a URL.
+	// An example use case for this CustomResourceDefinitionSourceType is a GitHub release asset
+	// that contains CRDs.
+	File CustomResourceDefinitionSourceType = "File"
+
+	// GitRepoDirectory is a CRD source type where CRDs are stored in a git repository.
+	//
+	// Format of the URL is https://$gitHost/$user/$repo/tree/branch/path/to/api/v1something1,
+	// for example https://github.com/kubernetes-sigs/cluster-api/tree/main/controlplane/kubeadm/api/v1beta1
+	GitRepoDirectory CustomResourceDefinitionSourceType = "GitRepoDirectory"
+)
 
 // CustomResourceDefinitionSourceSpec defines the desired state of CustomResourceDefinitionSource
 type CustomResourceDefinitionSourceSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of CustomResourceDefinitionSource. Edit customresourcedefinitionsource_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Type is a CustomResourceDefinitionSource (possible values are File and GitRepoDirectory)
+	// +kubebuilder:default=File
+	Type CustomResourceDefinitionSourceType `json:"type"`
+
+	// URL pointing to the CRD source
+	URL string `json:"url"`
+
+	// CRDNames are the names of CRDs to look for in this CRD source
+	CRDNames []string `json:"crd_names"`
 }
 
 // CustomResourceDefinitionSourceStatus defines the observed state of CustomResourceDefinitionSource

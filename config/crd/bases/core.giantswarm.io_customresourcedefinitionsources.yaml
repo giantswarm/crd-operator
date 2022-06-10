@@ -37,10 +37,24 @@ spec:
             description: CustomResourceDefinitionSourceSpec defines the desired state
               of CustomResourceDefinitionSource
             properties:
-              foo:
-                description: Foo is an example field of CustomResourceDefinitionSource.
-                  Edit customresourcedefinitionsource_types.go to remove/update
+              crd_names:
+                description: CRDNames are the names of CRDs to look for in this CRD
+                  source
+                items:
+                  type: string
+                type: array
+              type:
+                default: File
+                description: Type is a CustomResourceDefinitionSource (possible values
+                  are File and GitRepoDirectory)
                 type: string
+              url:
+                description: URL pointing to the CRD source
+                type: string
+            required:
+            - crd_names
+            - type
+            - url
             type: object
           status:
             description: CustomResourceDefinitionSourceStatus defines the observed
