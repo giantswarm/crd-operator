@@ -55,8 +55,9 @@ type CustomResourceDefinitionSourceSpec struct {
 
 // CustomResourceDefinitionSourceStatus defines the observed state of CustomResourceDefinitionSource
 type CustomResourceDefinitionSourceStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// Conditions define the current state of the CRD source
+	// +optional
+	Conditions Conditions `json:"conditions,omitempty"`
 }
 
 //+kubebuilder:object:root=true
