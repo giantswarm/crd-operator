@@ -1,0 +1,20 @@
+# permissions for end users to view conversionwebhooks.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: conversionwebhook-viewer-role
+rules:
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - conversionwebhooks
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - conversionwebhooks/status
+  verbs:
+  - get

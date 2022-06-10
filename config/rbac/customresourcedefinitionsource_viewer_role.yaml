@@ -1,0 +1,20 @@
+# permissions for end users to view customresourcedefinitionsources.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: customresourcedefinitionsource-viewer-role
+rules:
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - customresourcedefinitionsources
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - customresourcedefinitionsources/status
+  verbs:
+  - get

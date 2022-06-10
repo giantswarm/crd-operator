@@ -1,0 +1,24 @@
+# permissions for end users to edit customresourcedefinitionsources.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: customresourcedefinitionsource-editor-role
+rules:
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - customresourcedefinitionsources
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - customresourcedefinitionsources/status
+  verbs:
+  - get

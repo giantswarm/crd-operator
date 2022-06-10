@@ -1,0 +1,6 @@
+apiVersion: core.giantswarm.io/v1alpha1
+kind: CustomResourceDefinitionDeployment
+metadata:
+  name: customresourcedefinitiondeployment-sample
+spec:
+  # TODO(user): Add fields here

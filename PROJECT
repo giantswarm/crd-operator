@@ -1,0 +1,52 @@
+domain: giantswarm.io
+layout:
+- go.kubebuilder.io/v3
+projectName: crd-operator
+repo: github.com/giantswarm/crd-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: CustomResourceDefinitionSource
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: CustomResourceDefinitionDeployment
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: ConversionWebhook
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: ValidatingWebhook
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: MutatingWebhook
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
+version: "3"
