@@ -23,19 +23,33 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+type ConversionWebhookService struct {
+	Namespace string `json:"namespace"`
+
+	Name string `json:"name"`
+
+	Path string `json:"path"`
+
+	Port int `json:"port"`
+}
+
 // ConversionWebhookSpec defines the desired state of ConversionWebhook
 type ConversionWebhookSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// CustomResourceDefinition for which this conversion webhook is used
+	CustomResourceDefinition string `json:"customResourceDefinition"`
 
-	// Foo is an example field of ConversionWebhook. Edit conversionwebhook_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// +kubebuilder:default=true
+	Enabled bool `json:"enabled"`
+
+	Service *ConversionWebhookService `json:"service,omitempty"`
+
+	URL *string `json:"URL,omitempty"`
 }
 
 // ConversionWebhookStatus defines the observed state of ConversionWebhook
 type ConversionWebhookStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// Conditions represent the current state of the conversion webhook
+	Conditions Conditions `json:"conditions,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -57,6 +71,11 @@ type ConversionWebhookList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ConversionWebhook `json:"items"`
+}
+
+type ConversionWebhookTemplateSpec struct {
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              ConversionWebhookSpec `json:"spec,omitempty"`
 }
 
 func init() {

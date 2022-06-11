@@ -73,6 +73,10 @@ type CustomResourceDefinitionServedVersion struct {
 	Deprecated bool `json:"deprecated"`
 }
 
+type CustomResourceDefinitionWebhooks struct {
+	Conversion *ConversionWebhookTemplateSpec `json:"conversion,omitempty"`
+}
+
 // CustomResourceDefinitionDeploymentSpec defines the desired state of CustomResourceDefinitionDeployment
 type CustomResourceDefinitionDeploymentSpec struct {
 	// Group is the CRD API group
@@ -86,13 +90,13 @@ type CustomResourceDefinitionDeploymentSpec struct {
 
 	// Source where the CRDs can be found
 	Source CustomResourceDefinitionSource `json:"source"`
+
+	// Webhooks is the configuration for mutating, validating and conversion webhooks.
+	Webhooks *CustomResourceDefinitionWebhooks `json:"webhooks,omitempty"`
 }
 
 // CustomResourceDefinitionDeploymentStatus defines the observed state of CustomResourceDefinitionDeployment
 type CustomResourceDefinitionDeploymentStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-
 	// Conditions represent the current state of the CRD deployment
 	Conditions Conditions `json:"conditions,omitempty"`
 }

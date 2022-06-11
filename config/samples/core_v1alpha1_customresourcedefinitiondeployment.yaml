@@ -16,3 +16,87 @@ spec:
   source:
     type: File
     url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
+  webhooks:
+    mutating:
+      enabled: false
+    validating:
+      enabled: false
+    conversion:
+      spec:
+        enabled: true
+        service:
+          namespace: giantswarm
+          name: cluster-api-core
+          path: /x-y-z
+          port: 443
+
+# OR
+---
+apiVersion: core.giantswarm.io/v1alpha1
+kind: CustomResourceDefinitionDeployment
+metadata:
+  name: cluster-api-core-cluster
+spec:
+  group: cluster.x-k8s.io
+  versions:
+    storage: v1beta1
+    served:
+      - name: v1alpha4
+      - name: v1alpha3
+        deprecated: true
+      - name: v1alpha2
+        deprecated: true
+  kind: Cluster
+  source:
+    type: File
+    url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
+  mutatingWebhookTemplate:
+    spec:
+      enabled: false
+  validatingWebhookTemplate:
+    spec:
+      enabled: false
+  conversionWebhookTemplate:
+    spec:
+      enabled: true
+      service:
+        namespace: giantswarm
+        name: cluster-api-core
+        path: /x-y-z
+        port: 443
+
+# OR
+---
+apiVersion: core.giantswarm.io/v1alpha1
+kind: CustomResourceDefinitionDeployment
+metadata:
+  name: cluster-api-core-cluster
+spec:
+  group: cluster.x-k8s.io
+  versions:
+    storage: v1beta1
+    served:
+      - name: v1alpha4
+      - name: v1alpha3
+        deprecated: true
+      - name: v1alpha2
+        deprecated: true
+  kind: Cluster
+  source:
+    type: File
+    url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
+  webhookTemplates:
+    mutating:
+      spec:
+        enabled: false
+    validating:
+      spec:
+        enabled: false
+    conversion:
+      spec:
+        enabled: true
+        service:
+          namespace: giantswarm
+          name: cluster-api-core
+          path: /x-y-z
+          port: 443

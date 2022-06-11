@@ -90,6 +90,49 @@ spec:
                 required:
                 - storage
                 type: object
+              webhooks:
+                description: Webhooks is the configuration for mutating, validating
+                  and conversion webhooks.
+                properties:
+                  conversion:
+                    properties:
+                      metadata:
+                        type: object
+                      spec:
+                        description: ConversionWebhookSpec defines the desired state
+                          of ConversionWebhook
+                        properties:
+                          URL:
+                            type: string
+                          customResourceDefinition:
+                            description: CustomResourceDefinition for which this conversion
+                              webhook is used
+                            type: string
+                          enabled:
+                            default: true
+                            type: boolean
+                          service:
+                            properties:
+                              name:
+                                type: string
+                              namespace:
+                                type: string
+                              path:
+                                type: string
+                              port:
+                                type: integer
+                            required:
+                            - name
+                            - namespace
+                            - path
+                            - port
+                            type: object
+                        required:
+                        - customResourceDefinition
+                        - enabled
+                        type: object
+                    type: object
+                type: object
             required:
             - group
             - kind
