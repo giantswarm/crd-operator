@@ -78,20 +78,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controllers.CustomResourceDefinitionSourceReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "CustomResourceDefinitionSource")
-		os.Exit(1)
-	}
-	if err = (&controllers.CustomResourceDefinitionDeploymentReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "CustomResourceDefinitionDeployment")
-		os.Exit(1)
-	}
 	if err = (&controllers.ConversionWebhookReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
@@ -111,6 +97,13 @@ func main() {
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "MutatingWebhook")
+		os.Exit(1)
+	}
+	if err = (&controllers.CustomResourceDefinitionDeploymentReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "CustomResourceDefinitionDeployment")
 		os.Exit(1)
 	}
 	//+kubebuilder:scaffold:builder

@@ -37,14 +37,114 @@ spec:
             description: CustomResourceDefinitionDeploymentSpec defines the desired
               state of CustomResourceDefinitionDeployment
             properties:
-              foo:
-                description: Foo is an example field of CustomResourceDefinitionDeployment.
-                  Edit customresourcedefinitiondeployment_types.go to remove/update
+              group:
+                description: Group is the CRD API group
                 type: string
+              kind:
+                description: Kind is the CRD kind name
+                type: string
+              source:
+                description: Source where the CRDs can be found
+                properties:
+                  type:
+                    default: File
+                    description: Type is a CustomResourceDefinitionSource (possible
+                      values are File and GitRepoDirectory)
+                    type: string
+                  url:
+                    description: URL pointing to the CRD source
+                    type: string
+                required:
+                - type
+                - url
+                type: object
+              versions:
+                description: Versions defines stored and served API versions for this
+                  CRD
+                properties:
+                  served:
+                    description: Served defines all stored versions, besides the storage
+                      one.
+                    items:
+                      description: CustomResourceDefinitionServedVersion defines all
+                        stored versions, besides the storage one.
+                      properties:
+                        deprecated:
+                          default: false
+                          description: Deprecated is the flag that defines if the
+                            CRD version is deprecated
+                          type: boolean
+                        name:
+                          description: Name of the API version, e.g. v1alpha1, v1beta1,
+                            v1, v2
+                          type: string
+                      required:
+                      - deprecated
+                      - name
+                      type: object
+                    type: array
+                  storage:
+                    description: Storage is the current storage version. This version
+                      is also served and not deprecated.
+                    type: string
+                required:
+                - storage
+                type: object
+            required:
+            - group
+            - kind
+            - source
+            - versions
             type: object
           status:
             description: CustomResourceDefinitionDeploymentStatus defines the observed
               state of CustomResourceDefinitionDeployment
+            properties:
+              conditions:
+                description: Conditions represent the current state of the CRD deployment
+                items:
+                  description: Condition defines an observation of a Cluster API resource
+                    operational state.
+                  properties:
+                    lastTransitionTime:
+                      description: Last time the condition transitioned from one status
+                        to another. This should be when the underlying condition changed.
+                        If that is not known, then using the time when the API field
+                        changed is acceptable.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A human readable message indicating details about
+                        the transition. This field may be empty.
+                      type: string
+                    reason:
+                      description: The reason for the condition's last transition
+                        in CamelCase. The specific API may choose whether or not this
+                        field is considered a guaranteed API. This field may not be
+                        empty.
+                      type: string
+                    severity:
+                      description: Severity provides an explicit classification of
+                        Reason code, so the users or machines can immediately understand
+                        the current situation and act accordingly. The Severity field
+                        MUST be set only when Status=False.
+                      type: string
+                    status:
+                      description: Status of the condition, one of True, False, Unknown.
+                      type: string
+                    type:
+                      description: Type of condition in CamelCase or in foo.example.com/CamelCase.
+                        Many .condition.type values are consistent across resources
+                        like Available, but because arbitrary conditions can be useful
+                        (see .node.status.conditions), the ability to deconflict is
+                        important.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - status
+                  - type
+                  type: object
+                type: array
             type: object
         type: object
     served: true

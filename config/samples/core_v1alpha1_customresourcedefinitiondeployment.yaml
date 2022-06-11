@@ -1,6 +1,18 @@
 apiVersion: core.giantswarm.io/v1alpha1
 kind: CustomResourceDefinitionDeployment
 metadata:
-  name: customresourcedefinitiondeployment-sample
+  name: cluster-api-core-cluster
 spec:
-  # TODO(user): Add fields here
+  group: cluster.x-k8s.io
+  versions:
+    storage: v1beta1
+    served:
+      - name: v1alpha4
+      - name: v1alpha3
+        deprecated: true
+      - name: v1alpha2
+        deprecated: true
+  kind: Cluster
+  source:
+    type: File
+    url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
