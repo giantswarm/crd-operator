@@ -45,20 +45,26 @@ spec:
                 default: true
                 type: boolean
               service:
+                description: Service that handles webhook requests.
                 properties:
                   name:
                     type: string
                   namespace:
                     type: string
                   path:
+                    description: Path used for the webhook. If Path is not set, then
+                      PathStyle must be set.
+                    type: string
+                  pathStyle:
+                    description: PathStyle is a style of service path used for the
+                      webhook, e.g. KubebuilderWebhookPathStyle. If PathStyle is not
+                      set, then Path must be set.
                     type: string
                   port:
                     type: integer
                 required:
                 - name
                 - namespace
-                - path
-                - port
                 type: object
             required:
             - customResourceDefinition
@@ -69,7 +75,7 @@ spec:
             properties:
               conditions:
                 description: Conditions represent the current state of the conversion
-                  webhook
+                  webhook.
                 items:
                   description: Condition defines an observation of a Cluster API resource
                     operational state.

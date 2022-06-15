@@ -27,26 +27,26 @@ import (
 	corev1alpha1 "github.com/giantswarm/crd-operator/api/v1alpha1"
 )
 
-// MutatingWebhookReconciler reconciles a MutatingWebhook object
-type MutatingWebhookReconciler struct {
+// ValidatingWebhookTemplateReconciler reconciles a ValidatingWebhookTemplate object
+type ValidatingWebhookTemplateReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=core.giantswarm.io,resources=mutatingwebhooks,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=core.giantswarm.io,resources=mutatingwebhooks/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=core.giantswarm.io,resources=mutatingwebhooks/finalizers,verbs=update
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=validatingwebhooktemplates,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=validatingwebhooktemplates/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=validatingwebhooktemplates/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the MutatingWebhook object against the actual cluster state, and then
+// the ValidatingWebhookTemplate object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.11.2/pkg/reconcile
-func (r *MutatingWebhookReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+func (r *ValidatingWebhookTemplateReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
 	// TODO(user): your logic here
@@ -55,8 +55,8 @@ func (r *MutatingWebhookReconciler) Reconcile(ctx context.Context, req ctrl.Requ
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *MutatingWebhookReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *ValidatingWebhookTemplateReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&corev1alpha1.MutatingWebhook{}).
+		For(&corev1alpha1.ValidatingWebhookTemplate{}).
 		Complete(r)
 }

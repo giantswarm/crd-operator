@@ -23,16 +23,6 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-type ConversionWebhookService struct {
-	Namespace string `json:"namespace"`
-
-	Name string `json:"name"`
-
-	Path string `json:"path"`
-
-	Port int `json:"port"`
-}
-
 // ConversionWebhookSpec defines the desired state of ConversionWebhook
 type ConversionWebhookSpec struct {
 	// CustomResourceDefinition for which this conversion webhook is used
@@ -41,14 +31,15 @@ type ConversionWebhookSpec struct {
 	// +kubebuilder:default=true
 	Enabled bool `json:"enabled"`
 
-	Service *ConversionWebhookService `json:"service,omitempty"`
+	// Service that handles webhook requests.
+	Service *ServiceReference `json:"service,omitempty"`
 
 	URL *string `json:"URL,omitempty"`
 }
 
 // ConversionWebhookStatus defines the observed state of ConversionWebhook
 type ConversionWebhookStatus struct {
-	// Conditions represent the current state of the conversion webhook
+	// Conditions represent the current state of the conversion webhook.
 	Conditions Conditions `json:"conditions,omitempty"`
 }
 

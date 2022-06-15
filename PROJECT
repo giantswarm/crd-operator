@@ -40,4 +40,22 @@ resources:
   kind: CustomResourceDefinitionDeployment
   path: github.com/giantswarm/crd-operator/api/v1alpha1
   version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: MutatingWebhookTemplate
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: giantswarm.io
+  group: core
+  kind: ValidatingWebhookTemplate
+  path: github.com/giantswarm/crd-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"

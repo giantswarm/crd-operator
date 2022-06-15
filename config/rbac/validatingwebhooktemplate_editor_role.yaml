@@ -1,0 +1,24 @@
+# permissions for end users to edit validatingwebhooktemplates.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: validatingwebhooktemplate-editor-role
+rules:
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - validatingwebhooktemplates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - validatingwebhooktemplates/status
+  verbs:
+  - get

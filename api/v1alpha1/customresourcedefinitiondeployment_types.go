@@ -23,57 +23,7 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-const (
-	// File is a CRD source type where CRDs are stored in a YAML file that can has a URL.
-	// An example use case for this CustomResourceDefinitionSourceType is a GitHub release asset
-	// that contains CRDs.
-	File CustomResourceDefinitionSourceType = "File"
-
-	// GitRepoDirectory is a CRD source type where CRDs are stored in a git repository.
-	//
-	// Format of the URL is https://$gitHost/$user/$repo/tree/branch/path/to/api/v1something1,
-	// for example https://github.com/kubernetes-sigs/cluster-api/tree/main/controlplane/kubeadm/api/v1beta1
-	GitRepoDirectory CustomResourceDefinitionSourceType = "GitRepoDirectory"
-)
-
-type CustomResourceDefinitionSourceType string
-
-// CustomResourceDefinitionSource defines the desired state of CustomResourceDefinitionSource
-type CustomResourceDefinitionSource struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-
-	// Type is a CustomResourceDefinitionSource (possible values are File and GitRepoDirectory)
-	// +kubebuilder:default=File
-	Type CustomResourceDefinitionSourceType `json:"type"`
-
-	// URL pointing to the CRD source
-	URL string `json:"url"`
-}
-
-type CustomResourceDefinitionVersionsConfig struct {
-	// Storage is the current storage version. This version is also served and not deprecated.
-	Storage CustomResourceDefinitionStorageVersion `json:"storage"`
-
-	// Served defines all stored versions, besides the storage one.
-	Served []CustomResourceDefinitionServedVersion `json:"served,omitempty"`
-}
-
-// CustomResourceDefinitionStorageVersion represents the current storage version
-// that is served and not deprecated.
-type CustomResourceDefinitionStorageVersion string
-
-// CustomResourceDefinitionServedVersion defines all stored versions, besides the storage one.
-type CustomResourceDefinitionServedVersion struct {
-	// Name of the API version, e.g. v1alpha1, v1beta1, v1, v2
-	Name string `json:"name"`
-
-	// Deprecated is the flag that defines if the CRD version is deprecated
-	// +kubebuilder:default=false
-	Deprecated bool `json:"deprecated"`
-}
-
-type CustomResourceDefinitionWebhooks struct {
+type CustomResourceDefinitionWebhookTemplates struct {
 	Conversion *ConversionWebhookTemplateSpec `json:"conversion,omitempty"`
 }
 
@@ -91,8 +41,8 @@ type CustomResourceDefinitionDeploymentSpec struct {
 	// Source where the CRDs can be found
 	Source CustomResourceDefinitionSource `json:"source"`
 
-	// Webhooks is the configuration for mutating, validating and conversion webhooks.
-	Webhooks *CustomResourceDefinitionWebhooks `json:"webhooks,omitempty"`
+	// WebhookTemplates is the configuration for mutating, validating and conversion webhooks.
+	WebhookTemplates *CustomResourceDefinitionWebhookTemplates `json:"webhooks,omitempty"`
 }
 
 // CustomResourceDefinitionDeploymentStatus defines the observed state of CustomResourceDefinitionDeployment

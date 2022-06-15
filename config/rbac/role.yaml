@@ -60,7 +60,7 @@ rules:
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - mutatingwebhooks
+  - mutatingwebhooktemplates
   verbs:
   - create
   - delete
@@ -72,13 +72,13 @@ rules:
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - mutatingwebhooks/finalizers
+  - mutatingwebhooktemplates/finalizers
   verbs:
   - update
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - mutatingwebhooks/status
+  - mutatingwebhooktemplates/status
   verbs:
   - get
   - patch
@@ -86,7 +86,7 @@ rules:
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - validatingwebhooks
+  - validatingwebhooktemplates
   verbs:
   - create
   - delete
@@ -98,13 +98,13 @@ rules:
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - validatingwebhooks/finalizers
+  - validatingwebhooktemplates/finalizers
   verbs:
   - update
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - validatingwebhooks/status
+  - validatingwebhooktemplates/status
   verbs:
   - get
   - patch

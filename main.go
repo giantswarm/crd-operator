@@ -85,25 +85,25 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "ConversionWebhook")
 		os.Exit(1)
 	}
-	if err = (&controllers.ValidatingWebhookReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "ValidatingWebhook")
-		os.Exit(1)
-	}
-	if err = (&controllers.MutatingWebhookReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "MutatingWebhook")
-		os.Exit(1)
-	}
 	if err = (&controllers.CustomResourceDefinitionDeploymentReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "CustomResourceDefinitionDeployment")
+		os.Exit(1)
+	}
+	if err = (&controllers.MutatingWebhookTemplateReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "MutatingWebhookTemplate")
+		os.Exit(1)
+	}
+	if err = (&controllers.ValidatingWebhookTemplateReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "ValidatingWebhookTemplate")
 		os.Exit(1)
 	}
 	//+kubebuilder:scaffold:builder

@@ -63,11 +63,11 @@ spec:
                   CRD
                 properties:
                   served:
-                    description: Served defines all stored versions, besides the storage
-                      one.
+                    description: Served defines other served versions, besides the
+                      storage one.
                     items:
-                      description: CustomResourceDefinitionServedVersion defines all
-                        stored versions, besides the storage one.
+                      description: CustomResourceDefinitionServedVersion defines other
+                        served versions, besides the storage one.
                       properties:
                         deprecated:
                           default: false
@@ -91,7 +91,7 @@ spec:
                 - storage
                 type: object
               webhooks:
-                description: Webhooks is the configuration for mutating, validating
+                description: WebhookTemplates is the configuration for mutating, validating
                   and conversion webhooks.
                 properties:
                   conversion:
@@ -112,20 +112,26 @@ spec:
                             default: true
                             type: boolean
                           service:
+                            description: Service that handles webhook requests.
                             properties:
                               name:
                                 type: string
                               namespace:
                                 type: string
                               path:
+                                description: Path used for the webhook. If Path is
+                                  not set, then PathStyle must be set.
+                                type: string
+                              pathStyle:
+                                description: PathStyle is a style of service path
+                                  used for the webhook, e.g. KubebuilderWebhookPathStyle.
+                                  If PathStyle is not set, then Path must be set.
                                 type: string
                               port:
                                 type: integer
                             required:
                             - name
                             - namespace
-                            - path
-                            - port
                             type: object
                         required:
                         - customResourceDefinition
