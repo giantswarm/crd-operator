@@ -35,8 +35,8 @@ type CustomResourceDefinitionDeploymentSpec struct {
 	// Versions defines stored and served API versions for this CRD
 	Versions CustomResourceDefinitionVersionsConfig `json:"versions"`
 
-	// Kind is the CRD kind name
-	Kind string `json:"kind"`
+	// Kinds is the list of CRD kind names
+	Kinds []string `json:"kinds"`
 
 	// Source where the CRDs can be found
 	Source CustomResourceDefinitionSource `json:"source"`

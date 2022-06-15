@@ -40,9 +40,11 @@ spec:
               group:
                 description: Group is the CRD API group
                 type: string
-              kind:
-                description: Kind is the CRD kind name
-                type: string
+              kinds:
+                description: Kinds is the list of CRD kind names
+                items:
+                  type: string
+                type: array
               source:
                 description: Source where the CRDs can be found
                 properties:
@@ -183,7 +185,7 @@ spec:
                 type: object
             required:
             - group
-            - kind
+            - kinds
             - source
             - versions
             type: object
