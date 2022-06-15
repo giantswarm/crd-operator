@@ -1,6 +1,0 @@
-apiVersion: core.giantswarm.io/v1alpha1
-kind: MutatingWebhook
-metadata:
-  name: mutatingwebhook-sample
-spec:
-  # TODO(user): Add fields here
