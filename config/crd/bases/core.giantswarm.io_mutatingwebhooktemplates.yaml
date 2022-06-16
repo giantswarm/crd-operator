@@ -37,25 +37,6 @@ spec:
             description: MutatingWebhookTemplateSpec defines the desired state of
               MutatingWebhookTemplate
             properties:
-              gvkRule:
-                description: GVKRule specifies for which GVK is this webhook admitting
-                  requests.
-                properties:
-                  admitOtherVersions:
-                    description: AdmitOtherVersions is a flag that indicates if the
-                      webhook should handle API versions other than one specified
-                      in Version field. "True" is used by default.
-                    type: boolean
-                  group:
-                    type: string
-                  kind:
-                    type: string
-                  version:
-                    type: string
-                required:
-                - group
-                - version
-                type: object
               handler:
                 description: Handler specifies what handles webhook requests.
                 properties:
@@ -167,7 +148,6 @@ spec:
                   the admission hook uses.
                 type: string
             required:
-            - gvkRule
             - handler
             type: object
           status:

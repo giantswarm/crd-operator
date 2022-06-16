@@ -67,19 +67,6 @@ type ServiceReference struct {
 	Port *int `json:"port,omitempty"`
 }
 
-type AdmissionWebhookGVKRule struct {
-	Group   string `json:"group"`
-	Version string `json:"version"`
-
-	// +optional
-	Kind *string `json:"kind,omitempty"`
-
-	// AdmitOtherVersions is a flag that indicates if the webhook should handle
-	// API versions other than one specified in Version field. "True" is used by default.
-	// +optional
-	AdmitOtherVersions *bool `json:"admitOtherVersions,omitempty"`
-}
-
 // AdmissionWebhookTemplateSpec defines the desired state of MutatingWebhook.
 //
 // Notes:
@@ -87,9 +74,6 @@ type AdmissionWebhookGVKRule struct {
 type AdmissionWebhookTemplateSpec struct {
 	// Handler specifies what handles webhook requests.
 	Handler AdmissionWebhookHandler `json:"handler"`
-
-	// GVKRule specifies for which GVK is this webhook admitting requests.
-	GVKRule AdmissionWebhookGVKRule `json:"gvkRule"`
 
 	// ObjectSelector decides whether to run the webhook based on if the
 	// object has matching labels. objectSelector is evaluated against both
