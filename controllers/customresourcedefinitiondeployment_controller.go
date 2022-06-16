@@ -33,9 +33,18 @@ type CustomResourceDefinitionDeploymentReconciler struct {
 	Scheme *runtime.Scheme
 }
 
+// customresourcedefinitiondeployments role
 //+kubebuilder:rbac:groups=core.giantswarm.io,resources=customresourcedefinitiondeployments,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=core.giantswarm.io,resources=customresourcedefinitiondeployments/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=core.giantswarm.io,resources=customresourcedefinitiondeployments/finalizers,verbs=update
+
+// mutatingwebhooktemplates role
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=mutatingwebhooktemplates,verbs=get
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=mutatingwebhooktemplates/finalizers,verbs=update
+
+// validatingwebhooktemplates role
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=validatingwebhooktemplates,verbs=get
+//+kubebuilder:rbac:groups=core.giantswarm.io,resources=validatingwebhooktemplates/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

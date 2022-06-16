@@ -16,7 +16,6 @@ resources:
 - api:
     crdVersion: v1
     namespaced: true
-  controller: true
   domain: giantswarm.io
   group: core
   kind: MutatingWebhookTemplate
@@ -25,7 +24,6 @@ resources:
 - api:
     crdVersion: v1
     namespaced: true
-  controller: true
   domain: giantswarm.io
   group: core
   kind: ValidatingWebhookTemplate

@@ -36,13 +36,7 @@ rules:
   resources:
   - mutatingwebhooktemplates
   verbs:
-  - create
-  - delete
   - get
-  - list
-  - patch
-  - update
-  - watch
 - apiGroups:
   - core.giantswarm.io
   resources:
@@ -52,34 +46,12 @@ rules:
 - apiGroups:
   - core.giantswarm.io
   resources:
-  - mutatingwebhooktemplates/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - core.giantswarm.io
-  resources:
   - validatingwebhooktemplates
   verbs:
-  - create
-  - delete
   - get
-  - list
-  - patch
-  - update
-  - watch
 - apiGroups:
   - core.giantswarm.io
   resources:
   - validatingwebhooktemplates/finalizers
   verbs:
-  - update
-- apiGroups:
-  - core.giantswarm.io
-  resources:
-  - validatingwebhooktemplates/status
-  verbs:
-  - get
-  - patch
   - update
