@@ -250,11 +250,6 @@ func (in *CustomResourceDefinitionDeploymentList) DeepCopyObject() runtime.Objec
 func (in *CustomResourceDefinitionDeploymentSpec) DeepCopyInto(out *CustomResourceDefinitionDeploymentSpec) {
 	*out = *in
 	in.Versions.DeepCopyInto(&out.Versions)
-	if in.Kinds != nil {
-		in, out := &in.Kinds, &out.Kinds
-		*out = make([]string, len(*in))
-		copy(*out, *in)
-	}
 	out.Source = in.Source
 	if in.MutatingWebhook != nil {
 		in, out := &in.MutatingWebhook, &out.MutatingWebhook

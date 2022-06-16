@@ -40,11 +40,9 @@ spec:
               group:
                 description: Group is the CRD API group
                 type: string
-              kinds:
-                description: Kinds is the list of CRD kind names
-                items:
-                  type: string
-                type: array
+              kind:
+                description: Kind is the CRD kind name
+                type: string
               mutatingWebhook:
                 properties:
                   enabled:
@@ -154,7 +152,7 @@ spec:
                 type: object
             required:
             - group
-            - kinds
+            - kind
             - source
             - versions
             type: object
