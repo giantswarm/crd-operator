@@ -160,7 +160,6 @@ spec:
                         served versions, besides the storage one.
                       properties:
                         deprecated:
-                          default: false
                           description: Deprecated is the flag that defines if the
                             CRD version is deprecated
                           type: boolean
@@ -169,7 +168,6 @@ spec:
                             v1, v2
                           type: string
                       required:
-                      - deprecated
                       - name
                       type: object
                     type: array

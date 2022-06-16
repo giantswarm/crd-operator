@@ -19,6 +19,6 @@ type CustomResourceDefinitionServedVersion struct {
 	Name string `json:"name"`
 
 	// Deprecated is the flag that defines if the CRD version is deprecated
-	// +kubebuilder:default=false
-	Deprecated bool `json:"deprecated"`
+	// +optional
+	Deprecated *bool `json:"deprecated,omitempty"`
 }
