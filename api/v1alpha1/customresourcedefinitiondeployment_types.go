@@ -21,12 +21,6 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type CustomResourceDefinitionWebhookTemplates struct {
-	Conversion                   *ConversionWebhookTemplateSpec    `json:"conversion,omitempty"`
-	ValidatingWebhookTemplateRef *corev1.TypedLocalObjectReference `json:"validatingWebhookTemplateRef,omitempty"`
-	MutatingWebhookTemplateRef   *corev1.TypedLocalObjectReference `json:"mutatingWebhookTemplateRef,omitempty"`
-}
-
 // CustomResourceDefinitionDeploymentSpec defines the desired state of CustomResourceDefinitionDeployment
 type CustomResourceDefinitionDeploymentSpec struct {
 	// Group is the CRD API group
@@ -41,8 +35,11 @@ type CustomResourceDefinitionDeploymentSpec struct {
 	// Source where the CRDs can be found
 	Source CustomResourceDefinitionSource `json:"source"`
 
-	// WebhookTemplates is the configuration for mutating, validating and conversion webhooks.
-	WebhookTemplates *CustomResourceDefinitionWebhookTemplates `json:"webhooks,omitempty"`
+	// +optional
+	MutatingWebhook *CustomResourceDefinitionWebhookConfig `json:"mutatingWebhook,omitempty"`
+
+	// +optional
+	ValidatingWebhook *CustomResourceDefinitionWebhookConfig `json:"validatingWebhook,omitempty"`
 }
 
 // CustomResourceDefinitionDeploymentStatus defines the observed state of CustomResourceDefinitionDeployment
@@ -70,6 +67,13 @@ type CustomResourceDefinitionDeploymentList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []CustomResourceDefinitionDeployment `json:"items"`
+}
+
+type CustomResourceDefinitionWebhookConfig struct {
+	// +kubebuilder:default=true
+	Enabled bool `json:"enabled"`
+
+	TemplateRef corev1.TypedLocalObjectReference `json:"templateRef"`
 }
 
 func init() {
