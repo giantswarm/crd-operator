@@ -1,6 +1,0 @@
-apiVersion: core.giantswarm.io/v1alpha1
-kind: ConversionWebhook
-metadata:
-  name: conversionwebhook-sample
-spec:
-  # TODO(user): Add fields here
