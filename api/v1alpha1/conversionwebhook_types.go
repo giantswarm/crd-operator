@@ -64,11 +64,6 @@ type ConversionWebhookList struct {
 	Items           []ConversionWebhook `json:"items"`
 }
 
-type ConversionWebhookTemplateSpec struct {
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConversionWebhookSpec `json:"spec,omitempty"`
-}
-
 func init() {
 	SchemeBuilder.Register(&ConversionWebhook{}, &ConversionWebhookList{})
 }

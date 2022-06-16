@@ -1,0 +1,100 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: conversionwebhooktemplates.core.giantswarm.io
+spec:
+  group: core.giantswarm.io
+  names:
+    kind: ConversionWebhookTemplate
+    listKind: ConversionWebhookTemplateList
+    plural: conversionwebhooktemplates
+    singular: conversionwebhooktemplate
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ConversionWebhookTemplate is the Schema for the conversionwebhooktemplates
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ConversionWebhookTemplateSpec defines the desired state of
+              ConversionWebhookTemplate
+            properties:
+              handler:
+                description: Handler specifies what handles webhook requests.
+                properties:
+                  service:
+                    description: "Service is a reference to the service for this webhook.
+                      Either Service or URL must be specified. \n If the webhook is
+                      running within the cluster, then you should use Service."
+                    properties:
+                      name:
+                        type: string
+                      namespace:
+                        type: string
+                      path:
+                        description: Path used for the webhook. If Path is not set,
+                          then PathStyle must be set.
+                        type: string
+                      pathStyle:
+                        description: PathStyle is a style of service path used for
+                          the webhook, e.g. KubebuilderWebhookPathStyle. If PathStyle
+                          is not set, then Path must be set.
+                        type: string
+                      port:
+                        type: integer
+                    required:
+                    - name
+                    - namespace
+                    type: object
+                  url:
+                    description: "URL gives the location of the webhook, in standard
+                      URL form (`scheme://host:port/path`). Exactly one of URL or
+                      Service must be specified. \n The `host` should not refer to
+                      a service running in the cluster; use the Service field instead.
+                      The host might be resolved via external DNS in some apiservers
+                      (e.g., `kube-apiserver` cannot resolve in-cluster DNS as that
+                      would be a layering violation). `host` may also be an IP address.
+                      \n Please note that using `localhost` or `127.0.0.1` as a `host`
+                      is risky unless you take great care to run this webhook on all
+                      hosts which run an apiserver which might need to make calls
+                      to this webhook. Such installs are likely to be non-portable,
+                      i.e., not easy to turn up in a new cluster. \n The scheme must
+                      be \"https\"; the URL must begin with \"https://\". \n A path
+                      is optional, and if present may be any string permissible in
+                      a URL. You may use the path to pass an arbitrary string to the
+                      webhook, for example, a cluster identifier. \n Attempting to
+                      use a user or basic auth e.g. \"user:password@\" is not allowed.
+                      Fragments (\"#...\") and query parameters (\"?...\") are not
+                      allowed, either."
+                    type: string
+                type: object
+            required:
+            - handler
+            type: object
+        type: object
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

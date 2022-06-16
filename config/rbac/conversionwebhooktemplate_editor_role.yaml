@@ -1,0 +1,24 @@
+# permissions for end users to edit conversionwebhooktemplates.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: conversionwebhooktemplate-editor-role
+rules:
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - conversionwebhooktemplates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - core.giantswarm.io
+  resources:
+  - conversionwebhooktemplates/status
+  verbs:
+  - get
