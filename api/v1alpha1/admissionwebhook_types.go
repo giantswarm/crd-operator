@@ -4,7 +4,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type WebhookHandler struct {
+type AdmissionWebhookHandler struct {
 	// URL gives the location of the webhook, in standard URL form
 	// (`scheme://host:port/path`). Exactly one of URL or Service
 	// must be specified.
@@ -67,7 +67,7 @@ type ServiceReference struct {
 	Port *int `json:"port,omitempty"`
 }
 
-type WebhookGVKRule struct {
+type AdmissionWebhookGVKRule struct {
 	Group   string `json:"group"`
 	Version string `json:"version"`
 
@@ -80,16 +80,16 @@ type WebhookGVKRule struct {
 	AdmitOtherVersions *bool `json:"admitOtherVersions,omitempty"`
 }
 
-// WebhookTemplateSpec defines the desired state of MutatingWebhook.
+// AdmissionWebhookTemplateSpec defines the desired state of MutatingWebhook.
 //
 // Notes:
 // - It always uses Create and Update for operations.
-type WebhookTemplateSpec struct {
+type AdmissionWebhookTemplateSpec struct {
 	// Handler specifies what handles webhook requests.
-	Handler WebhookHandler `json:"handler"`
+	Handler AdmissionWebhookHandler `json:"handler"`
 
 	// GVKRule specifies for which GVK is this webhook admitting requests.
-	GVKRule WebhookGVKRule `json:"gvkRule"`
+	GVKRule AdmissionWebhookGVKRule `json:"gvkRule"`
 
 	// ObjectSelector decides whether to run the webhook based on if the
 	// object has matching labels. objectSelector is evaluated against both

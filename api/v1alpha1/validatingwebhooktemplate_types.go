@@ -22,7 +22,7 @@ import (
 
 // ValidatingWebhookTemplateSpec defines the desired state of ValidatingWebhookTemplate
 type ValidatingWebhookTemplateSpec struct {
-	WebhookTemplateSpec `json:",inline"`
+	AdmissionWebhookTemplateSpec `json:",inline"`
 }
 
 // ValidatingWebhookTemplateStatus defines the observed state of ValidatingWebhookTemplate

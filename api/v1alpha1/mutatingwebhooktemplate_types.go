@@ -23,8 +23,8 @@ import (
 
 // MutatingWebhookTemplateSpec defines the desired state of MutatingWebhookTemplate
 type MutatingWebhookTemplateSpec struct {
-	WebhookTemplateSpec `json:",inline"`
-	ReinvocationPolicy  *admissionregistrationv1.ReinvocationPolicyType `json:"reinvocationPolicy,omitempty"`
+	AdmissionWebhookTemplateSpec `json:",inline"`
+	ReinvocationPolicy           *admissionregistrationv1.ReinvocationPolicyType `json:"reinvocationPolicy,omitempty"`
 }
 
 // MutatingWebhookTemplateStatus defines the observed state of MutatingWebhookTemplate
