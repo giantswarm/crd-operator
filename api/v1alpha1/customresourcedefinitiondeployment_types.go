@@ -40,6 +40,9 @@ type CustomResourceDefinitionDeploymentSpec struct {
 
 	// +optional
 	ValidatingWebhook *CustomResourceDefinitionWebhookConfig `json:"validatingWebhook,omitempty"`
+
+	// +optional
+	ConversionWebhook *CustomResourceDefinitionWebhookConfig `json:"conversionWebhook,omitempty"`
 }
 
 // CustomResourceDefinitionDeploymentStatus defines the observed state of CustomResourceDefinitionDeployment
