@@ -150,15 +150,9 @@ spec:
             required:
             - handler
             type: object
-          status:
-            description: MutatingWebhookTemplateStatus defines the observed state
-              of MutatingWebhookTemplate
-            type: object
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
 status:
   acceptedNames:
     kind: ""

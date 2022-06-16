@@ -146,15 +146,9 @@ spec:
             required:
             - handler
             type: object
-          status:
-            description: ValidatingWebhookTemplateStatus defines the observed state
-              of ValidatingWebhookTemplate
-            type: object
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
 status:
   acceptedNames:
     kind: ""

@@ -27,20 +27,14 @@ type MutatingWebhookTemplateSpec struct {
 	ReinvocationPolicy           *admissionregistrationv1.ReinvocationPolicyType `json:"reinvocationPolicy,omitempty"`
 }
 
-// MutatingWebhookTemplateStatus defines the observed state of MutatingWebhookTemplate
-type MutatingWebhookTemplateStatus struct {
-}
-
 //+kubebuilder:object:root=true
-//+kubebuilder:subresource:status
 
 // MutatingWebhookTemplate is the Schema for the mutatingwebhooktemplates API
 type MutatingWebhookTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   MutatingWebhookTemplateSpec   `json:"spec,omitempty"`
-	Status MutatingWebhookTemplateStatus `json:"status,omitempty"`
+	Spec MutatingWebhookTemplateSpec `json:"spec,omitempty"`
 }
 
 //+kubebuilder:object:root=true

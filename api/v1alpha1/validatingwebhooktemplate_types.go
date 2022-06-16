@@ -25,20 +25,14 @@ type ValidatingWebhookTemplateSpec struct {
 	AdmissionWebhookTemplateSpec `json:",inline"`
 }
 
-// ValidatingWebhookTemplateStatus defines the observed state of ValidatingWebhookTemplate
-type ValidatingWebhookTemplateStatus struct {
-}
-
 //+kubebuilder:object:root=true
-//+kubebuilder:subresource:status
 
 // ValidatingWebhookTemplate is the Schema for the validatingwebhooktemplates API
 type ValidatingWebhookTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   ValidatingWebhookTemplateSpec   `json:"spec,omitempty"`
-	Status ValidatingWebhookTemplateStatus `json:"status,omitempty"`
+	Spec ValidatingWebhookTemplateSpec `json:"spec,omitempty"`
 }
 
 //+kubebuilder:object:root=true
