@@ -32,3 +32,7 @@ spec:
       apiGroup: core.giantswarm.io/v1alpha1
       kind: ConversionWebhookTemplate
       name: cluster-api-core-cluster
+  certificateTemplateRef:
+    apiGroup: core.giantswarm.io/v1alpha1
+    kind: ServiceCertificateTemplate
+    name: capi

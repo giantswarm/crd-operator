@@ -43,6 +43,9 @@ type CustomResourceDefinitionDeploymentSpec struct {
 
 	// +optional
 	ConversionWebhook *CustomResourceDefinitionWebhookConfig `json:"conversionWebhook,omitempty"`
+
+	// +optional
+	CertificateTemplateRef *corev1.TypedLocalObjectReference `json:"certificateTemplateRef,omitempty"`
 }
 
 // CustomResourceDefinitionDeploymentStatus defines the observed state of CustomResourceDefinitionDeployment
