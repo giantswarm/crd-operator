@@ -26,3 +26,9 @@ spec:
       apiGroup: core.giantswarm.io/v1alpha1
       kind: ValidatingWebhookTemplate
       name: cluster-api-core-cluster
+  conversionWebhook:
+    enabled: true
+    templateRef:
+      apiGroup: core.giantswarm.io/v1alpha1
+      kind: ConversionWebhookTemplate
+      name: cluster-api-core-cluster
