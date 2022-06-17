@@ -14,25 +14,35 @@ spec:
   source:
     type: File
     url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
-  mutatingWebhook:
-    enabled: true
-    templateRef:
-      apiGroup: core.giantswarm.io/v1alpha1
-      kind: MutatingWebhookTemplate
-      name: cluster-api-core-cluster
-  validatingWebhook:
-    enabled: true
-    templateRef:
-      apiGroup: core.giantswarm.io/v1alpha1
-      kind: ValidatingWebhookTemplate
-      name: cluster-api-core-cluster
-  conversionWebhook:
-    enabled: true
-    templateRef:
-      apiGroup: core.giantswarm.io/v1alpha1
-      kind: ConversionWebhookTemplate
-      name: cluster-api-core-cluster
-  certificateTemplateRef:
-    apiGroup: core.giantswarm.io/v1alpha1
-    kind: ServiceCertificateTemplate
-    name: capi
+  webhooksConfig:
+    mutatingWebhook:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: MutatingWebhookTemplate
+        name: cluster-api-core-cluster
+    validatingWebhook:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: ValidatingWebhookTemplate
+        name: cluster-api-core-cluster
+    conversionWebhook:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: ConversionWebhookTemplate
+        name: cluster-api-core-cluster
+    handler:
+      service:
+        namespace: giantswarm
+        name: capi-webhook-service
+    certificate:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: ServiceCertificateTemplate
+        name: capi
+    deploymentOptions:
+      deploymentName: capi-controller-manager
+      injectCertificateSecretVolume: true
