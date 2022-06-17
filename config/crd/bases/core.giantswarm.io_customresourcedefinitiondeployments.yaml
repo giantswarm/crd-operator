@@ -37,92 +37,12 @@ spec:
             description: CustomResourceDefinitionDeploymentSpec defines the desired
               state of CustomResourceDefinitionDeployment
             properties:
-              certificateTemplateRef:
-                description: TypedLocalObjectReference contains enough information
-                  to let you locate the typed referenced object inside the same namespace.
-                properties:
-                  apiGroup:
-                    description: APIGroup is the group for the resource being referenced.
-                      If APIGroup is not specified, the specified Kind must be in
-                      the core API group. For any other third-party types, APIGroup
-                      is required.
-                    type: string
-                  kind:
-                    description: Kind is the type of resource being referenced
-                    type: string
-                  name:
-                    description: Name is the name of resource being referenced
-                    type: string
-                required:
-                - kind
-                - name
-                type: object
-              conversionWebhook:
-                properties:
-                  enabled:
-                    default: true
-                    type: boolean
-                  templateRef:
-                    description: TypedLocalObjectReference contains enough information
-                      to let you locate the typed referenced object inside the same
-                      namespace.
-                    properties:
-                      apiGroup:
-                        description: APIGroup is the group for the resource being
-                          referenced. If APIGroup is not specified, the specified
-                          Kind must be in the core API group. For any other third-party
-                          types, APIGroup is required.
-                        type: string
-                      kind:
-                        description: Kind is the type of resource being referenced
-                        type: string
-                      name:
-                        description: Name is the name of resource being referenced
-                        type: string
-                    required:
-                    - kind
-                    - name
-                    type: object
-                required:
-                - enabled
-                - templateRef
-                type: object
               group:
                 description: Group is the CRD API group
                 type: string
               kind:
                 description: Kind is the CRD kind name
                 type: string
-              mutatingWebhook:
-                properties:
-                  enabled:
-                    default: true
-                    type: boolean
-                  templateRef:
-                    description: TypedLocalObjectReference contains enough information
-                      to let you locate the typed referenced object inside the same
-                      namespace.
-                    properties:
-                      apiGroup:
-                        description: APIGroup is the group for the resource being
-                          referenced. If APIGroup is not specified, the specified
-                          Kind must be in the core API group. For any other third-party
-                          types, APIGroup is required.
-                        type: string
-                      kind:
-                        description: Kind is the type of resource being referenced
-                        type: string
-                      name:
-                        description: Name is the name of resource being referenced
-                        type: string
-                    required:
-                    - kind
-                    - name
-                    type: object
-                required:
-                - enabled
-                - templateRef
-                type: object
               source:
                 description: Source where the CRDs can be found
                 properties:
@@ -137,36 +57,6 @@ spec:
                 required:
                 - type
                 - url
-                type: object
-              validatingWebhook:
-                properties:
-                  enabled:
-                    default: true
-                    type: boolean
-                  templateRef:
-                    description: TypedLocalObjectReference contains enough information
-                      to let you locate the typed referenced object inside the same
-                      namespace.
-                    properties:
-                      apiGroup:
-                        description: APIGroup is the group for the resource being
-                          referenced. If APIGroup is not specified, the specified
-                          Kind must be in the core API group. For any other third-party
-                          types, APIGroup is required.
-                        type: string
-                      kind:
-                        description: Kind is the type of resource being referenced
-                        type: string
-                      name:
-                        description: Name is the name of resource being referenced
-                        type: string
-                    required:
-                    - kind
-                    - name
-                    type: object
-                required:
-                - enabled
-                - templateRef
                 type: object
               versions:
                 description: Versions defines stored and served API versions for this
@@ -197,6 +87,193 @@ spec:
                     type: string
                 required:
                 - storage
+                type: object
+              webhooksConfig:
+                description: WebhooksConfig specifies configuration for mutating,
+                  validating and conversion webhooks, and certificate used by the
+                  webhook service.
+                properties:
+                  certificate:
+                    properties:
+                      enabled:
+                        default: true
+                        type: boolean
+                      templateRef:
+                        description: TypedLocalObjectReference contains enough information
+                          to let you locate the typed referenced object inside the
+                          same namespace.
+                        properties:
+                          apiGroup:
+                            description: APIGroup is the group for the resource being
+                              referenced. If APIGroup is not specified, the specified
+                              Kind must be in the core API group. For any other third-party
+                              types, APIGroup is required.
+                            type: string
+                          kind:
+                            description: Kind is the type of resource being referenced
+                            type: string
+                          name:
+                            description: Name is the name of resource being referenced
+                            type: string
+                        required:
+                        - kind
+                        - name
+                        type: object
+                    required:
+                    - enabled
+                    - templateRef
+                    type: object
+                  conversionWebhook:
+                    properties:
+                      enabled:
+                        default: true
+                        type: boolean
+                      templateRef:
+                        description: TypedLocalObjectReference contains enough information
+                          to let you locate the typed referenced object inside the
+                          same namespace.
+                        properties:
+                          apiGroup:
+                            description: APIGroup is the group for the resource being
+                              referenced. If APIGroup is not specified, the specified
+                              Kind must be in the core API group. For any other third-party
+                              types, APIGroup is required.
+                            type: string
+                          kind:
+                            description: Kind is the type of resource being referenced
+                            type: string
+                          name:
+                            description: Name is the name of resource being referenced
+                            type: string
+                        required:
+                        - kind
+                        - name
+                        type: object
+                    required:
+                    - enabled
+                    type: object
+                  deploymentOptions:
+                    description: DeploymentOptions specifies options for the webhook
+                      server deployment, e.g. setting a flag that indicates if appropriate
+                      volumes and volume mounts will be set on the Deployment.
+                    properties:
+                      deploymentName:
+                        type: string
+                      injectCertificateSecretVolume:
+                        type: boolean
+                    required:
+                    - deploymentName
+                    - injectCertificateSecretVolume
+                    type: object
+                  handler:
+                    description: Handler
+                    properties:
+                      service:
+                        description: "Service is a reference to the service for this
+                          webhook. Either Service or URL must be specified. \n If
+                          the webhook is running within the cluster, then you should
+                          use Service."
+                        properties:
+                          name:
+                            type: string
+                          namespace:
+                            type: string
+                          path:
+                            description: Path used for the webhook. If Path is not
+                              set, then PathStyle must be set.
+                            type: string
+                          pathStyle:
+                            description: PathStyle is a style of service path used
+                              for the webhook, e.g. KubebuilderWebhookPathStyle. If
+                              PathStyle is not set, then Path must be set.
+                            type: string
+                          port:
+                            type: integer
+                        required:
+                        - name
+                        - namespace
+                        type: object
+                      url:
+                        description: "URL gives the location of the webhook, in standard
+                          URL form (`scheme://host:port/path`). Exactly one of URL
+                          or Service must be specified. \n The `host` should not refer
+                          to a service running in the cluster; use the Service field
+                          instead. The host might be resolved via external DNS in
+                          some apiservers (e.g., `kube-apiserver` cannot resolve in-cluster
+                          DNS as that would be a layering violation). `host` may also
+                          be an IP address. \n Please note that using `localhost`
+                          or `127.0.0.1` as a `host` is risky unless you take great
+                          care to run this webhook on all hosts which run an apiserver
+                          which might need to make calls to this webhook. Such installs
+                          are likely to be non-portable, i.e., not easy to turn up
+                          in a new cluster. \n The scheme must be \"https\"; the URL
+                          must begin with \"https://\". \n A path is optional, and
+                          if present may be any string permissible in a URL. You may
+                          use the path to pass an arbitrary string to the webhook,
+                          for example, a cluster identifier. \n Attempting to use
+                          a user or basic auth e.g. \"user:password@\" is not allowed.
+                          Fragments (\"#...\") and query parameters (\"?...\") are
+                          not allowed, either."
+                        type: string
+                    type: object
+                  mutatingWebhook:
+                    properties:
+                      enabled:
+                        default: true
+                        type: boolean
+                      templateRef:
+                        description: TypedLocalObjectReference contains enough information
+                          to let you locate the typed referenced object inside the
+                          same namespace.
+                        properties:
+                          apiGroup:
+                            description: APIGroup is the group for the resource being
+                              referenced. If APIGroup is not specified, the specified
+                              Kind must be in the core API group. For any other third-party
+                              types, APIGroup is required.
+                            type: string
+                          kind:
+                            description: Kind is the type of resource being referenced
+                            type: string
+                          name:
+                            description: Name is the name of resource being referenced
+                            type: string
+                        required:
+                        - kind
+                        - name
+                        type: object
+                    required:
+                    - enabled
+                    type: object
+                  validatingWebhook:
+                    properties:
+                      enabled:
+                        default: true
+                        type: boolean
+                      templateRef:
+                        description: TypedLocalObjectReference contains enough information
+                          to let you locate the typed referenced object inside the
+                          same namespace.
+                        properties:
+                          apiGroup:
+                            description: APIGroup is the group for the resource being
+                              referenced. If APIGroup is not specified, the specified
+                              Kind must be in the core API group. For any other third-party
+                              types, APIGroup is required.
+                            type: string
+                          kind:
+                            description: Kind is the type of resource being referenced
+                            type: string
+                          name:
+                            description: Name is the name of resource being referenced
+                            type: string
+                        required:
+                        - kind
+                        - name
+                        type: object
+                    required:
+                    - enabled
+                    type: object
                 type: object
             required:
             - group

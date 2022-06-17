@@ -147,8 +147,6 @@ spec:
                 description: ReinvocationPolicyType specifies what type of policy
                   the admission hook uses.
                 type: string
-            required:
-            - handler
             type: object
         type: object
     served: true

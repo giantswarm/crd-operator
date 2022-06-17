@@ -143,8 +143,6 @@ spec:
                       are ANDed.
                     type: object
                 type: object
-            required:
-            - handler
             type: object
         type: object
     served: true

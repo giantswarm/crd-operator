@@ -23,9 +23,8 @@ import (
 
 // ServiceCertificateTemplateSpec defines the desired state of ServiceCertificateTemplate
 type ServiceCertificateTemplateSpec struct {
-	ServiceName string                           `json:"serviceName"`
-	SecretName  string                           `json:"secretName"`
-	IssuerRef   corev1.TypedLocalObjectReference `json:"issuerRef"`
+	SecretName string                           `json:"secretName"`
+	IssuerRef  corev1.TypedLocalObjectReference `json:"issuerRef"`
 }
 
 //+kubebuilder:object:root=true
@@ -49,4 +48,11 @@ type ServiceCertificateTemplateList struct {
 
 func init() {
 	SchemeBuilder.Register(&ServiceCertificateTemplate{}, &ServiceCertificateTemplateList{})
+}
+
+type CertificateConfig struct {
+	// +kubebuilder:default=true
+	Enabled bool `json:"enabled"`
+
+	TemplateRef corev1.TypedLocalObjectReference `json:"templateRef"`
 }

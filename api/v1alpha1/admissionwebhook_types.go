@@ -10,7 +10,8 @@ import (
 // - It always uses Create and Update for operations.
 type AdmissionWebhookTemplateSpec struct {
 	// Handler specifies what handles webhook requests.
-	Handler WebhookHandlerConfig `json:"handler"`
+	// +optional
+	Handler *WebhookHandlerConfig `json:"handler,omitempty"`
 
 	// ObjectSelector decides whether to run the webhook based on if the
 	// object has matching labels. objectSelector is evaluated against both

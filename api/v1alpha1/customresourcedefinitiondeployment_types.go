@@ -17,7 +17,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -35,17 +34,10 @@ type CustomResourceDefinitionDeploymentSpec struct {
 	// Source where the CRDs can be found
 	Source CustomResourceDefinitionSource `json:"source"`
 
+	// WebhooksConfig specifies configuration for mutating, validating and conversion
+	// webhooks, and certificate used by the webhook service.
 	// +optional
-	MutatingWebhook *CustomResourceDefinitionWebhookConfig `json:"mutatingWebhook,omitempty"`
-
-	// +optional
-	ValidatingWebhook *CustomResourceDefinitionWebhookConfig `json:"validatingWebhook,omitempty"`
-
-	// +optional
-	ConversionWebhook *CustomResourceDefinitionWebhookConfig `json:"conversionWebhook,omitempty"`
-
-	// +optional
-	CertificateTemplateRef *corev1.TypedLocalObjectReference `json:"certificateTemplateRef,omitempty"`
+	WebhooksConfig *WebhooksConfig `json:"webhooksConfig,omitempty"`
 }
 
 // CustomResourceDefinitionDeploymentStatus defines the observed state of CustomResourceDefinitionDeployment
@@ -73,13 +65,6 @@ type CustomResourceDefinitionDeploymentList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []CustomResourceDefinitionDeployment `json:"items"`
-}
-
-type CustomResourceDefinitionWebhookConfig struct {
-	// +kubebuilder:default=true
-	Enabled bool `json:"enabled"`
-
-	TemplateRef corev1.TypedLocalObjectReference `json:"templateRef"`
 }
 
 func init() {

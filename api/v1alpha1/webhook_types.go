@@ -1,5 +1,7 @@
 package v1alpha1
 
+import corev1 "k8s.io/api/core/v1"
+
 type WebhookPathStyle string
 
 const (
@@ -61,4 +63,40 @@ type WebhookHandlerConfig struct {
 	//
 	// +optional
 	Service *ServiceReference `json:"service,omitempty"`
+}
+
+type WebhooksConfig struct {
+	// +optional
+	MutatingWebhook *WebhookConfig `json:"mutatingWebhook,omitempty"`
+
+	// +optional
+	ValidatingWebhook *WebhookConfig `json:"validatingWebhook,omitempty"`
+
+	// +optional
+	ConversionWebhook *WebhookConfig `json:"conversionWebhook,omitempty"`
+
+	// Handler
+	// +optional
+	Handler *WebhookHandlerConfig `json:"handler,omitempty"`
+
+	// +optional
+	Certificate *CertificateConfig `json:"certificate,omitempty"`
+
+	// DeploymentOptions specifies options for the webhook server deployment, e.g.
+	// setting a flag that indicates if appropriate volumes and volume mounts will
+	// be set on the Deployment.
+	DeploymentOptions *DeploymentOptions `json:"deploymentOptions,omitempty"`
+}
+
+type WebhookConfig struct {
+	// +kubebuilder:default=true
+	Enabled bool `json:"enabled"`
+
+	// +optional
+	TemplateRef *corev1.TypedLocalObjectReference `json:"templateRef,omitempty"`
+}
+
+type DeploymentOptions struct {
+	DeploymentName                string `json:"deploymentName"`
+	InjectCertificateSecretVolume bool   `json:"injectCertificateSecretVolume"`
 }
