@@ -1,6 +1,10 @@
 apiVersion: core.giantswarm.io/v1alpha1
 kind: ConversionWebhookTemplate
 metadata:
-  name: conversionwebhooktemplate-sample
+  name: cluster-api-core-cluster
 spec:
-  # TODO(user): Add fields here
+  handler:
+    service:
+      namespace: giantswarm
+      name: capi-webhook-service
+      pathStyle: KubebuilderWebhookPathStyle

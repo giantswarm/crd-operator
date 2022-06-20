@@ -1,6 +1,10 @@
 apiVersion: core.giantswarm.io/v1alpha1
 kind: ServiceCertificateTemplate
 metadata:
-  name: servicecertificatetemplate-sample
+  name: capi
 spec:
-  # TODO(user): Add fields here
+  secretName: capi-webhook-service-cert
+  issuerRef:
+    apiGroup: cert-manager.io/v1
+    kind: ClusterIssuer
+    name: selfsigned-giantswarm
