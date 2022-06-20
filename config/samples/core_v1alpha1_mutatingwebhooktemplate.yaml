@@ -12,3 +12,18 @@ spec:
     matchLabels:
       cluster.x-k8s.io/watch-filter: capi
   reinvocationPolicy: IfNeeded
+---
+apiVersion: core.giantswarm.io/v1alpha1
+kind: MutatingWebhookTemplate
+metadata:
+  name: cluster-api-core-machine
+spec:
+  handler:
+    service:
+      namespace: giantswarm
+      name: capi-webhook-service
+      pathStyle: KubebuilderWebhookPathStyle
+  objectSelector:
+    matchLabels:
+      cluster.x-k8s.io/watch-filter: capi
+  ignoreErrors: true

@@ -24,7 +24,9 @@ import (
 // MutatingWebhookTemplateSpec defines the desired state of MutatingWebhookTemplate
 type MutatingWebhookTemplateSpec struct {
 	AdmissionWebhookTemplateSpec `json:",inline"`
-	ReinvocationPolicy           *admissionregistrationv1.ReinvocationPolicyType `json:"reinvocationPolicy,omitempty"`
+
+	// +optional
+	ReinvocationPolicy *admissionregistrationv1.ReinvocationPolicyType `json:"reinvocationPolicy,omitempty"`
 }
 
 //+kubebuilder:object:root=true
