@@ -1,0 +1,52 @@
+apiVersion: core.giantswarm.io/v1alpha1
+kind: CustomResourceDefinitionGroupDeployment
+metadata:
+  name: cluster-api-core
+spec:
+  group: cluster.x-k8s.io
+  versions:
+    storage: v1beta1
+    served:
+      - name: v1alpha4
+      - name: v1alpha3
+        deprecated: true
+  kinds:
+  - Cluster
+  - Machine
+  - MachineSet
+  - MachineDeployment
+  source:
+    type: File
+    url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
+  webhooksConfig:
+    mutatingWebhook:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: MutatingWebhookTemplate
+        name: cluster-api-core
+    validatingWebhook:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: ValidatingWebhookTemplate
+        name: cluster-api-core
+    conversionWebhook:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: ConversionWebhookTemplate
+        name: cluster-api-core
+    handler:
+      service:
+        namespace: giantswarm
+        name: capi-webhook-service
+    certificate:
+      enabled: true
+      templateRef:
+        apiGroup: core.giantswarm.io/v1alpha1
+        kind: ServiceCertificateTemplate
+        name: capi
+    deploymentOptions:
+      deploymentName: capi-controller-manager
+      injectCertificateSecretVolume: true
