@@ -23,8 +23,7 @@ import (
 // ConversionWebhookTemplateSpec defines the desired state of ConversionWebhookTemplate
 type ConversionWebhookTemplateSpec struct {
 	// Handler specifies what handles webhook requests.
-	// +optional
-	Handler *WebhookHandlerConfig `json:"handler,omitempty"`
+	Handler WebhookHandlerConfig `json:"handler"`
 }
 
 //+kubebuilder:object:root=true
