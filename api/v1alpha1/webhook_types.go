@@ -1,6 +1,10 @@
 package v1alpha1
 
-import corev1 "k8s.io/api/core/v1"
+import (
+	apps "k8s.io/api/apps/v1"
+	core "k8s.io/api/core/v1"
+	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
 
 type WebhookPathStyle string
 
@@ -79,13 +83,12 @@ type WebhooksConfig struct {
 	// +optional
 	Handler *WebhookHandlerConfig `json:"handler,omitempty"`
 
+	// Certificate config
 	// +optional
 	Certificate *CertificateConfig `json:"certificate,omitempty"`
 
-	// DeploymentOptions specifies options for the webhook server deployment, e.g.
-	// setting a flag that indicates if appropriate volumes and volume mounts will
-	// be set on the Deployment.
-	DeploymentOptions *DeploymentOptions `json:"deploymentOptions,omitempty"`
+	// Deployment specifies config for the webhook server deployment.
+	Deployment *DeploymentConfig `json:"deployment,omitempty"`
 }
 
 type WebhookConfig struct {
@@ -93,10 +96,31 @@ type WebhookConfig struct {
 	Enabled bool `json:"enabled"`
 
 	// +optional
-	TemplateRef *corev1.TypedLocalObjectReference `json:"templateRef,omitempty"`
+	TemplateRef *core.TypedLocalObjectReference `json:"templateRef,omitempty"`
 }
 
-type DeploymentOptions struct {
-	DeploymentName                string `json:"deploymentName"`
-	InjectCertificateSecretVolume bool   `json:"injectCertificateSecretVolume"`
+type DeploymentConfig struct {
+	Name string `json:"name"`
+
+	// Mode specifies how the webhook Deployment is managed. Update for just updating
+	// an existing Deployment, CreateOrUpdate for creating and owning a new webhook
+	// deployment.
+	Mode WebhookDeploymentMode `json:"mode"`
+
+	// Template for creating a new Deployment. This field is set only if Mode is set
+	// to CreateOrUpdate.
+	// +optional
+	Template *DeploymentTemplateSpec `json:"template,omitempty"`
+}
+
+type WebhookDeploymentMode string
+
+const (
+	Update         WebhookDeploymentMode = "Update"
+	CreateOrUpdate WebhookDeploymentMode = "CreateOrUpdate"
+)
+
+type DeploymentTemplateSpec struct {
+	meta.ObjectMeta `json:",inline"`
+	Spec            apps.DeploymentSpec `json:"spec"`
 }

@@ -8,3 +8,15 @@ spec:
       namespace: giantswarm
       name: capi-webhook-service
       pathStyle: KubebuilderWebhookPathStyle
+---
+apiVersion: core.giantswarm.io/v1alpha1
+kind: ConversionWebhookTemplate
+metadata:
+  name: abc-mutate-create
+spec:
+  handler:
+    service:
+      namespace: giantswarm
+      name: abc-webhook-service
+      path: "/mutate/abc/create"
+      port: 6443

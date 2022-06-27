@@ -47,6 +47,6 @@ spec:
         apiGroup: core.giantswarm.io/v1alpha1
         kind: ServiceCertificateTemplate
         name: capi
-    deploymentOptions:
-      deploymentName: capi-controller-manager
-      injectCertificateSecretVolume: true
+    deployment:
+      name: capi-controller-manager
+      mode: Update
