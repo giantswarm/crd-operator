@@ -22,7 +22,7 @@ import (
 
 // ConversionWebhookTemplateSpec defines the desired state of ConversionWebhookTemplate
 type ConversionWebhookTemplateSpec struct {
-	// Handler specifies what handles webhook requests.
+	// Handler specifies what handles conversion requests.
 	Handler WebhookHandlerConfig `json:"handler"`
 }
 

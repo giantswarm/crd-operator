@@ -38,7 +38,7 @@ spec:
               ConversionWebhookTemplate
             properties:
               handler:
-                description: Handler specifies what handles webhook requests.
+                description: Handler specifies what handles conversion requests.
                 properties:
                   service:
                     description: "Service is a reference to the service for this webhook.

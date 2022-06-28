@@ -23,8 +23,11 @@ import (
 
 // ServiceCertificateTemplateSpec defines the desired state of ServiceCertificateTemplate
 type ServiceCertificateTemplateSpec struct {
-	SecretName string                           `json:"secretName"`
-	IssuerRef  corev1.TypedLocalObjectReference `json:"issuerRef"`
+	// SecretName is a name of the secret where the certificate is stored.
+	SecretName string `json:"secretName"`
+
+	// IssuerRef is a reference to Issuer or ClusterIssuer resource.
+	IssuerRef corev1.TypedLocalObjectReference `json:"issuerRef"`
 }
 
 //+kubebuilder:object:root=true

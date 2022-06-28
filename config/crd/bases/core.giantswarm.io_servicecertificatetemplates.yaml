@@ -38,8 +38,7 @@ spec:
               of ServiceCertificateTemplate
             properties:
               issuerRef:
-                description: TypedLocalObjectReference contains enough information
-                  to let you locate the typed referenced object inside the same namespace.
+                description: IssuerRef is a reference to Issuer or ClusterIssuer resource.
                 properties:
                   apiGroup:
                     description: APIGroup is the group for the resource being referenced.
@@ -58,6 +57,8 @@ spec:
                 - name
                 type: object
               secretName:
+                description: SecretName is a name of the secret where the certificate
+                  is stored.
                 type: string
             required:
             - issuerRef
