@@ -71,13 +71,13 @@ type WebhookHandlerConfig struct {
 
 type WebhooksConfig struct {
 	// +optional
-	MutatingWebhook *WebhookConfig `json:"mutatingWebhook,omitempty"`
+	Mutating *WebhookConfig `json:"mutating,omitempty"`
 
 	// +optional
-	ValidatingWebhook *WebhookConfig `json:"validatingWebhook,omitempty"`
+	Validating *WebhookConfig `json:"validating,omitempty"`
 
 	// +optional
-	ConversionWebhook *WebhookConfig `json:"conversionWebhook,omitempty"`
+	Conversion *WebhookConfig `json:"conversion,omitempty"`
 
 	// Handler
 	// +optional

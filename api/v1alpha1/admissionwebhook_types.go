@@ -4,7 +4,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// AdmissionWebhookTemplateSpec defines the desired state of MutatingWebhook.
+// AdmissionWebhookTemplateSpec defines the desired state of Mutating.
 //
 // Notes:
 // - It always uses Create and Update for operations.

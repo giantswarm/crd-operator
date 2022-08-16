@@ -7,9 +7,9 @@ spec:
   versions:
     storage: v1beta1
     served:
-      - name: v1alpha4
-      - name: v1alpha3
-        deprecated: true
+    - name: v1alpha4
+    - name: v1alpha3
+      deprecated: true
   kinds:
   - Cluster
   - Machine
@@ -18,20 +18,20 @@ spec:
   source:
     type: File
     url: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/core-components.yaml
-  webhooksConfig:
-    mutatingWebhook:
+  webhooksConfigs:
+  - mutating:
       enabled: true
       templateRef:
         apiGroup: core.giantswarm.io/v1alpha1
         kind: MutatingWebhookTemplate
         name: cluster-api-core
-    validatingWebhook:
+    validating:
       enabled: true
       templateRef:
         apiGroup: core.giantswarm.io/v1alpha1
         kind: ValidatingWebhookTemplate
         name: cluster-api-core
-    conversionWebhook:
+    conversion:
       enabled: true
       templateRef:
         apiGroup: core.giantswarm.io/v1alpha1

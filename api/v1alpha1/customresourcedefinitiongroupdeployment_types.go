@@ -37,10 +37,10 @@ type CustomResourceDefinitionGroupDeploymentSpec struct {
 	// Source where the CRDs can be found
 	Source CustomResourceDefinitionSource `json:"source"`
 
-	// WebhooksConfig specifies configuration for mutating, validating and conversion
+	// WebhooksConfigs specifies configuration for mutating, validating and conversion
 	// webhooks, and certificate used by the webhook service.
 	// +optional
-	WebhooksConfig *WebhooksConfig `json:"webhooksConfig,omitempty"`
+	WebhooksConfigs []WebhooksConfig `json:"webhooksConfigs,omitempty"`
 }
 
 // CustomResourceDefinitionGroupDeploymentStatus defines the observed state of CustomResourceDefinitionGroupDeployment
